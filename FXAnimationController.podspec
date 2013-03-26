@@ -9,6 +9,6 @@ Pod::Spec.new do |s|
     :git => 'https://github.com/mobitar/FXAnimationController.git',
     :tag =>  '1.0'
   }
-  s.source_files = '/'
+  s.source_files = ''
   s.ios.frameworks = 'QuartzCore'
 end
