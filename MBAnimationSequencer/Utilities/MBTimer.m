@@ -1,14 +1,14 @@
 //
-//  FXTimer.m
-//  Flexbumin
+//  MBAnimationSequencer
+//  Mo Bitar
 //
 //  Created by Mo Bitar on 3/23/13.
-//  Copyright (c) 2013 Ora. All rights reserved.
+//  Copyright (c) 2013 bitar.io. All rights reserved.
 //
 
-#import "FXTimer.h"
+#import "MBTimer.h"
 
-@implementation FXTimer {
+@implementation MBTimer {
     NSDate *startDate;
 }
 @synthesize currentValue = _currentValue;

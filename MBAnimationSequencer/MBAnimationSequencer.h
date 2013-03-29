@@ -1,17 +1,17 @@
 //
-//  FXAnimationController.h
-//  Flexbumin
+//  MBAnimationSequencer
+//  Mo Bitar
 //
 //  Created by Mo Bitar on 3/23/13.
-//  Copyright (c) 2013 Ora. All rights reserved.
+//  Copyright (c) 2013 bitar.io. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "FXAnimationStep.h"
-#import "FXAnimationStore.h"
+#import "MBAnimationStep.h"
+#import "MBAnimationStore.h"
 
-@class FXAnimationStep;
-@interface FXAnimationController : NSObject
+@class MBAnimationStep;
+@interface MBAnimationSequencer : NSObject
 
 // looping options
 @property (nonatomic) NSUInteger repeatCount;
@@ -25,19 +25,20 @@
 @property (nonatomic, readonly) BOOL isAnimationInProgress;
 
 // factory
-+ (FXAnimationController*)animationControllerWithAnimations:(NSArray*)animations removeOnCompletion:(BOOL)removeOnCompletion;
++ (MBAnimationSequencer*)animationControllerWithAnimations:(NSArray*)animations removeOnCompletion:(BOOL)removeOnCompletion;
 
 // quickie
 + (void)spawnAnimationControllerToPlayAnimations:(NSArray*)animations removeOnCompletion:(BOOL)removeOnCompletion;
 + (void)spawnAnimationControllerToPlayAnimations:(NSArray*)animations removeOnCompletion:(BOOL)removeOnCompletion delay:(CGFloat)delay;
 
 // preparation
-- (void)addAnimationToSequence:(FXAnimationStep*)animation;
+- (void)addAnimationToSequence:(MBAnimationStep*)animation;
 
 // showtime
 - (void)playFromBeginning;
-- (void)playFromStep:(FXAnimationStep*)step;
-- (void)playStep:(FXAnimationStep *)step;
+- (void)playFromBeginningAfterDelay:(CGFloat)delay;
+- (void)playFromStep:(MBAnimationStep*)step;
+- (void)playStep:(MBAnimationStep *)step;
 
 // cleanup
 - (void)removeAllAnimationsAndResetState;

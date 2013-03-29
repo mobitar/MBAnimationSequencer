@@ -1,36 +1,36 @@
 //
-//  FXAnimationController.m
-//  Flexbumin
+//  MBAnimationSequencer
+//  Mo Bitar
 //
 //  Created by Mo Bitar on 3/23/13.
-//  Copyright (c) 2013 Ora. All rights reserved.
+//  Copyright (c) 2013 bitar.io. All rights reserved.
 //
 
-#import "FXAnimationController.h"
-#import "FXTimer.h"
+#import "MBAnimationSequencer.h"
+#import "MBTimer.h"
 #import "NSTimer+Blocks.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface FXAnimationController ()
+@interface MBAnimationSequencer ()
 @property (nonatomic) NSMutableArray *steps;
 @property (nonatomic) NSMutableArray *schedulers;
 @property (nonatomic) NSMutableArray *removedSteps;
 
-@property (nonatomic) FXAnimationStep *currentStep;
+@property (nonatomic) MBAnimationStep *currentStep;
 @property (nonatomic) CGFloat currentPlayCount;
 
-@property (nonatomic) FXTimer *timer;
+@property (nonatomic) MBTimer *timer;
 @end
 
-@implementation FXAnimationController {
+@implementation MBAnimationSequencer {
     BOOL stop;
 }
 
 - (id)init {
     if(self = [super init]) {
         _steps = [NSMutableArray new];
-        _timer = [FXTimer new];
+        _timer = [MBTimer new];
         _removedSteps = [NSMutableArray new];
         _schedulers = [NSMutableArray new];
         _shouldRemoveAllAnimationsOnOverallCompletion = YES;
@@ -52,14 +52,14 @@
     });
 }
 
-+ (FXAnimationController*)animationControllerWithAnimations:(NSArray*)animations removeOnCompletion:(BOOL)removeOnCompletion {
-    FXAnimationController *controller = [FXAnimationController new];
++ (MBAnimationSequencer*)animationControllerWithAnimations:(NSArray*)animations removeOnCompletion:(BOOL)removeOnCompletion {
+    MBAnimationSequencer *controller = [MBAnimationSequencer new];
     controller.steps = animations.mutableCopy;
     controller.shouldRemoveAllAnimationsOnOverallCompletion = removeOnCompletion;
     return controller;
 }
 
-- (void)addAnimationToSequence:(FXAnimationStep*)animation {
+- (void)addAnimationToSequence:(MBAnimationStep*)animation {
     [self.steps addObject:animation];
 }
 
@@ -72,6 +72,13 @@
 
 #pragma mark Showtime
 
+- (void)playFromBeginningAfterDelay:(CGFloat)delay {
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self playFromBeginning];
+    });
+}
+
 - (void)playFromBeginning {
     if(self.shouldRemoveAllAnimationsBetweenIterations)
         [self removeAnimationsFromAllSteps];
@@ -82,11 +89,11 @@
     [self playNextStep];
 }
 
-- (void)playFromStep:(FXAnimationStep*)step {
+- (void)playFromStep:(MBAnimationStep*)step {
     [self performStep:step singleStep:NO];
 }
 
-- (void)playStep:(FXAnimationStep *)step {
+- (void)playStep:(MBAnimationStep *)step {
     [self performStep:step singleStep:YES];
 }
 
@@ -96,7 +103,7 @@
     and the controller is ready to play the next one
 */
 - (void)playNextStep {
-    FXAnimationStep *step = [self.steps objectAtIndex:0];
+    MBAnimationStep *step = [self.steps objectAtIndex:0];
     [self.steps removeObjectAtIndex:0];
     [self.removedSteps addObject:step];
     
@@ -116,7 +123,7 @@
     else [self performStep:step singleStep:NO];
 }
 
-- (void)performStep:(FXAnimationStep*)step singleStep:(BOOL)singleStep {
+- (void)performStep:(MBAnimationStep*)step singleStep:(BOOL)singleStep {
     _isAnimationInProgress = YES;
     
     [step perform];
@@ -129,7 +136,7 @@
     
     if(self.steps.count > 0) {
         CGFloat delay = 0;
-        FXAnimationStep *nextStep = [self.steps objectAtIndex:0];
+        MBAnimationStep *nextStep = [self.steps objectAtIndex:0];
         
         if(nextStep.relativeOffset) {
             if(nextStep.relativeOffset == 0)
@@ -168,11 +175,11 @@
 #pragma mark Cleanup
 
 - (void)removeAnimationsFromAllSteps {
-    for(FXAnimationStep *step in self.steps) {
+    for(MBAnimationStep *step in self.steps) {
         [step removeAnimations];
     }
     
-    for(FXAnimationStep *step in self.removedSteps) {
+    for(MBAnimationStep *step in self.removedSteps) {
         [step removeAnimations];
     }
 }

@@ -1,43 +1,43 @@
 //
-//  FXAnimationStep.m
-//  Flexbumin
+//  MBAnimationSequencer
+//  Mo Bitar
 //
-//  Created by Mo Bitar on 3/25/13.
-//  Copyright (c) 2013 Ora. All rights reserved.
+//  Created by Mo Bitar on 3/23/13.
+//  Copyright (c) 2013 bitar.io. All rights reserved.
 //
 
-#import "FXAnimationStep.h"
-#import "FXTimer.h"
+#import "MBAnimationStep.h"
+#import "MBTimer.h"
 #import "NSTimer+Blocks.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface FXAnimationStep ()
+@interface MBAnimationStep ()
 @property (nonatomic, copy) FXAnimationBlock viewBlock;
 @property (nonatomic, copy) FXLayerAnimationBlock layerBlock;
 @property (nonatomic) NSMutableArray *schedulers;
 @end
 
-@implementation FXAnimationStep
+@implementation MBAnimationStep
 
 // if relativeOffset is nil, the animation waits until the previous step has completed
 // if relative offset is >= 0, the animation starts after the previous step with the specified offset
 
-+ (FXAnimationStep*)viewAnimationStepWithBlock:(FXAnimationBlock)block toViews:(NSArray*)views duration:(CGFloat)duration {
-    FXAnimationStep *step = [self stepWithDuration:duration];
++ (MBAnimationStep*)viewAnimationStepWithBlock:(FXAnimationBlock)block toViews:(NSArray*)views duration:(CGFloat)duration {
+    MBAnimationStep *step = [self stepWithDuration:duration];
     step.viewBlock = block;
     step.views = views;
     return step;
 }
 
-+ (FXAnimationStep*)layerAnimationStepWithBlock:(FXLayerAnimationBlock)block toLayers:(NSArray*)layers duration:(CGFloat)duration{
-    FXAnimationStep *step = [self stepWithDuration:duration];
++ (MBAnimationStep*)layerAnimationStepWithBlock:(FXLayerAnimationBlock)block toLayers:(NSArray*)layers duration:(CGFloat)duration{
+    MBAnimationStep *step = [self stepWithDuration:duration];
     step.layerBlock = block;
     step.layers = layers;
     return step;
 }
 
-+ (FXAnimationStep*)stepWithDuration:(CGFloat)duration {
-    FXAnimationStep *step = [FXAnimationStep new];
++ (MBAnimationStep*)stepWithDuration:(CGFloat)duration {
+    MBAnimationStep *step = [MBAnimationStep new];
     step.duration = duration;
     return step;
 }
@@ -50,7 +50,7 @@
 
 - (id)init {
     if(self = [super init]) {
-        _timer = [FXTimer new];
+        _timer = [MBTimer new];
     }
     return self;
 }

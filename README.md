@@ -1,19 +1,19 @@
-# FXAnimationController
-FXAnimationController is a general purpose animation sequencer.
+# MBAnimationSequencer
+MBAnimationSequencer is a general purpose animation sequencer.
 
 ###Usage:
 ``` objective-c
-FXAnimationController *animation = [FXAnimationController new];
+MBAnimationSequencer *animation = [MBAnimationSequencer new];
 
-[animation addAnimationToSequence:[FXAnimationStep viewAnimationStepWithBlock:^(UIView *view, CGFloat duration){
+[animation addAnimationToSequence:[MBAnimationStep viewAnimationStepWithBlock:^(UIView *view, CGFloat duration){
 	view.alpha = 0.1;
 } toViews:@[view1] duration:0.1]];
 
-[animation addAnimationToSequence:[FXAnimationStep viewAnimationStepWithBlock:^(UIView *view, CGFloat duration){
+[animation addAnimationToSequence:[MBAnimationStep viewAnimationStepWithBlock:^(UIView *view, CGFloat duration){
 	view.transform = ...
 } toViews:@[view2, view3] duration:0.2]];
 
-[animation addAnimationToSequence:[FXAnimationStep layerAnimationStepWithBlock:^(CALayer *layer, CGFloat duration){
+[animation addAnimationToSequence:[MBAnimationStep layerAnimationStepWithBlock:^(CALayer *layer, CGFloat duration){
 	layer.opacity = 1.0;
 } toLayers:@[layer1, layer2] duration:0.2]];
 

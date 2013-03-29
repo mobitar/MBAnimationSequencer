@@ -1,15 +1,15 @@
 //
-//  FXAnimationStore.m
-//  Flexbumin
+//  MBAnimationSequencer
+//  Mo Bitar
 //
-//  Created by Mo Bitar on 3/25/13.
-//  Copyright (c) 2013 Ora. All rights reserved.
+//  Created by Mo Bitar on 3/23/13.
+//  Copyright (c) 2013 bitar.io. All rights reserved.
 //
 
-#import "FXAnimationStore.h"
+#import "MBAnimationStore.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation FXAnimationStore
+@implementation MBAnimationStore
 
 #pragma mark General
 
@@ -68,17 +68,25 @@
 
 #pragma mark Custom
 
-// set your layer's transform with a scale before applying this to generate a pulsing effect
-+ (CABasicAnimation*)pulseAnimation {
-    CABasicAnimation *animation = [self basicAnimationForKeyPath:@"transform" fromValue:nil toValue:[NSValue valueWithCATransform3D:CATransform3DIdentity] duration:0.35 fillMode:nil removeOnCompletion:YES];
++ (CABasicAnimation*)pulseAnimationToMaxScale:(CATransform3D)scale {
+    CABasicAnimation *animation = [self basicAnimationForKeyPath:@"transform" fromValue:nil toValue:[NSValue valueWithCATransform3D:scale] duration:0.35 fillMode:nil removeOnCompletion:YES];
     animation.autoreverses = YES;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     animation.repeatCount = HUGE_VAL;
     return animation;
 }
 
+// set your layer's transform with a scale before applying this to generate a pulsing effect
++ (CABasicAnimation*)pulseAnimation {
+    return [self pulseAnimationToMaxScale:CATransform3DIdentity];
+}
+
 NSValue *valueWith3DScaleTransform(float x, float y, float z) {
     return [NSValue valueWithCATransform3D:CATransform3DMakeScale(x, y, z)];
+}
+
+NSValue *valueWith3DTransform(CATransform3D t) {
+    return [NSValue valueWithCATransform3D:t];
 }
 
 + (CAKeyframeAnimation*)bounceAnimationWithDuration:(CGFloat)duration maxScale:(CGFloat)maxScale {
