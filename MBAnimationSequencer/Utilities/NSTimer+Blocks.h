@@ -1,8 +1,8 @@
 //
 //  MBAnimationSequencer
-//  Mo Bitar
+//  Bitar
 //
-//  Created by Mo Bitar on 3/23/13.
+//  Created by Bitar on 3/23/13.
 //  Copyright (c) 2013 bitar.io. All rights reserved.
 //
 

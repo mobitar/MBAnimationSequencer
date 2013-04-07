@@ -1,7 +1,8 @@
 Pod::Spec.new do |s|
   s.name = 'MBAnimationSequencer'
   s.version = '1.0'
-  s.summary = 'General purpose animation sequencer'
+  s.summary = 'General purpose animation sequencer.'
+  s.homepage = "https://github.com/mobitar/MBAnimationSequencer.git"
   s.author = {
     'Mo Bitar' => 'me@bitar.io'
   }
@@ -11,10 +12,10 @@ Pod::Spec.new do |s|
   }
   s.source_files = 'MBAnimationSequencer'
   s.ios.frameworks = 'QuartzCore'
-
-  s.subspec 'Utilities' do |us|
-    us.header_dir     = 'MBAnimationSequencer/Utilities'
-    us.source_files   = 'MBAnimationSequencer/Utilities'
-  end
   
+  s.subspec 'Utilities' do |us|
+      us.header_dir     = 'MBAnimationSequencer/Utilities'
+      us.source_files   = 'MBAnimationSequencer/Utilities'
+    end
+
 end
