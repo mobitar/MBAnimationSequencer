@@ -43,7 +43,7 @@ typedef void (^FXLayerAnimationBlock)(CALayer *layer, CGFloat duration);
 + (CGFloat)durationForStepWithItemCount:(NSUInteger)count singleItemDuration:(CGFloat)duration delayBetweenEveryView:(CGFloat)delay;
 
 // factory
-+ (MBAnimationStep*)viewAnimationStepWithBlock:(FXAnimationBlock)block toViews:(NSArray*)views duration:(CGFloat)duration;
-+ (MBAnimationStep*)layerAnimationStepWithBlock:(FXLayerAnimationBlock)block toLayers:(NSArray*)layers duration:(CGFloat)duration;
++ (MBAnimationStep*)viewAnimationStepWithViews:(NSArray*)views duration:(CGFloat)duration block:(FXAnimationBlock)block;
++ (MBAnimationStep*)layerAnimationStepWithLayers:(NSArray*)layers duration:(CGFloat)duration block:(FXLayerAnimationBlock)block;
 
 @end

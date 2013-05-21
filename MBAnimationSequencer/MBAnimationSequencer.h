@@ -39,6 +39,7 @@
 - (void)playFromBeginningAfterDelay:(CGFloat)delay;
 - (void)playFromStep:(MBAnimationStep*)step;
 - (void)playStep:(MBAnimationStep *)step;
+- (void)stop;
 
 // cleanup
 - (void)removeAllAnimationsAndResetState;

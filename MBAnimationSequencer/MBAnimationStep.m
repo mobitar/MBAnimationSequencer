@@ -22,14 +22,14 @@
 // if relativeOffset is nil, the animation waits until the previous step has completed
 // if relative offset is >= 0, the animation starts after the previous step with the specified offset
 
-+ (MBAnimationStep*)viewAnimationStepWithBlock:(FXAnimationBlock)block toViews:(NSArray*)views duration:(CGFloat)duration {
++ (MBAnimationStep*)viewAnimationStepWithViews:(NSArray*)views duration:(CGFloat)duration block:(FXAnimationBlock)block {
     MBAnimationStep *step = [self stepWithDuration:duration];
     step.viewBlock = block;
     step.views = views;
     return step;
 }
 
-+ (MBAnimationStep*)layerAnimationStepWithBlock:(FXLayerAnimationBlock)block toLayers:(NSArray*)layers duration:(CGFloat)duration{
++ (MBAnimationStep*)layerAnimationStepWithLayers:(NSArray*)layers duration:(CGFloat)duration block:(FXLayerAnimationBlock)block {
     MBAnimationStep *step = [self stepWithDuration:duration];
     step.layerBlock = block;
     step.layers = layers;

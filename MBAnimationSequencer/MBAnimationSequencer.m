@@ -172,6 +172,12 @@
     }
 }
 
+- (void)stop {
+    [self.schedulers removeAllObjects];
+    [self.timer stop];
+    [self.steps removeAllObjects];
+}
+
 #pragma mark Cleanup
 
 - (void)removeAnimationsFromAllSteps {
